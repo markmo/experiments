@@ -1,0 +1,4 @@
+http://rss.nzherald.co.nz/rss/xml/nzhrsscid_000000001.xml,New Zealand Herald,Auckland
+http://www.stuff.co.nz/rss/dominion-post/news/national,Dominion Post,Wellington
+http://www.stuff.co.nz/rss/the-press/news,The Press,Christchurch
+http://www.odt.co.nz/news/national/feed,Otago Daily Times,Dunedin
