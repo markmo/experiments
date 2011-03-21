@@ -98,11 +98,47 @@ all_words = [word for article in articles for word in article['words']]
 tc = nltk.TextCollection(all_words)
 
 for article in articles:
+    # Calculate TF-IDF scores
     tf_idf_scores = {}
     for word in article['words']:
         # NLTK method for calculating TF-IDF
         tf_idf_scores[word] = tc.tf_idf(word, article['words'])
     article['tf_idf_scores'] = tf_idf_scores
+    
+    # Extract Entities
+    sentences = nltk.tokenize.sent_tokenize(article['content'])
+    tokens = [nltk.tokenize.word_tokenize(s) for s in sentences]
+    pos_tagged_tokens = [nltk.pos_tag(t) for t in tokens]
+    
+    # Flatten the list since we're not using sentence structure
+    # and sentences are guaranteed to be separated by a special
+    # POS tuple such as ('.', '.')
+    
+    pos_tagged_tokens = [token for sent in pos_tagged_tokens for token in sent]
+    
+    all_entity_chunks = []
+    previous_pos = None
+    current_entity_chunk = []
+    for (token, pos) in pos_tagged_tokens:
+        if pos == previous_pos and pos.startswith('NN'):
+            current_entity_chunk.append(token)
+        elif pos.startswith('NN'):
+            if current_entity_chunk != []:
+                
+                # Note that current_entity_chunk could be a duplicate when appended,
+                # so frequency analysis again becomes a consideration
+                
+                all_entity_chunks.append((' '.join(current_entity_chunk), pos))
+            current_entity_chunk = [token]
+        previous_pos = pos
+        
+    # Store the chunks as an index for the document
+    # and account for frequency while we're at it...
+    
+    article['entities'] = {}
+    for c in all_entity_chunks:
+        article['entities'][c] = article['entities'].get(c, 0) + 1
+        
 
 # Printing sample results to see if I am getting what I expected
 # Looks like TF-IDF may not be that useful unles the corpus is
@@ -126,3 +162,6 @@ scores = articles[1]['tf_idf_scores']
 sorted_scores = sorted(scores.iteritems(), key=operator.itemgetter(1), reverse=True)
 for score in sorted_scores:
     print "%s %4i, %.5f" % (score[0].ljust(20), articles[1]['wc'][score[0]], score[1])
+
+for article in articles:
+    print "%s: %s" % (article['title'][0:30].ljust(30), ", ".join([entity for (entity, pos) in article['entities'] if entity.istitle()]))
