@@ -1,0 +1,6 @@
+std,lower_quartile,dwelling,district,end_date,area,region,bedrooms,upper_quartile,start_date,bonds_received,average_rent,median_rent,date_type
+65.47,245,Apartment,Gisborne,2011-02-28,Gisborne,Gisborne,2,352,2010-09-01,9,308,330,range
+23.17,170,Apartment,Gisborne,2011-02-28,Gisborne,Gisborne,1,200,2010-09-01,6,186,192,range
+56.73,165,Flat,Gisborne,2011-02-28,Gisborne,Gisborne,3,257,2010-09-01,9,220,235,range
+29.12,175,Flat,Gisborne,2011-02-28,Gisborne,Gisborne,2,215,2010-09-01,81,195,190,range
+20.31,150,Flat,Gisborne,2011-02-28,Gisborne,Gisborne,1,165,2010-09-01,38,152,155,range
