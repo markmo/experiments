@@ -1,0 +1,20 @@
+With the CouchDB Server running,
+run 'python harvester.py'
+
+It will fetch a single article and write the results to CouchDB
+using the following schema as per models/models.py
+
+Article:
+  source
+  title
+  link
+  raw (content)
+  word_frequencies:
+    word
+    frequency
+    
+Word:
+  word
+  word_frequencies:
+    article_id
+    frequency
