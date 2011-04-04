@@ -1,0 +1,16 @@
+<html>
+<head>
+  <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+</head>
+  <body>
+    {% for article in articles %}
+      <h3>{{ article.title }}</h3>
+      <p>{{ article.content }}</p>
+      <ul>
+      {% for f in article.word_frequencies %}
+        <li>{{ f.word }} ({{ f.frequency }})</li>
+      {% endfor %}
+      </ul>
+    {% endfor %}
+  </body>
+</html>
