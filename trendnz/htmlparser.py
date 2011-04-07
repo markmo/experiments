@@ -26,5 +26,5 @@ class HtmlParser():
                 for c in p.contents:
                     if c.string and len(c.string) > 0:
                         text = nltk.clean_html(c.string)
-                        contents.append(text)
-        return ' '.join(contents)
+                        contents.append(text.strip())
+        return '\n'.join(contents)
