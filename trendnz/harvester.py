@@ -38,7 +38,8 @@ class Harvester():
         except URLError:
             print 'Failed to fetch ' + url
         feed = feedparser.parse(c)
-        for e in feed.entries[:1]: # read just the first entry while debugging
+        # for e in feed.entries[:1]: # read just the first entry while debugging
+        for e in feed.entries:
             image_link = None
             image_type = None
             for link in e.links:
